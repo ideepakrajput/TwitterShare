@@ -9,8 +9,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-        i {
-            font-size: 20px;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            color: #fff;
         }
 
         #share-buttons {
@@ -30,10 +34,33 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
+        article {
+            background: linear-gradient(to right, #303030, #101010);
+            /* Adjust gradient colors */
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #4b6cb7;
+            /* Adjust heading color */
+        }
+
+        #articles-heading {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            /* Adjust gradient colors */
+            margin: 0;
+        }
     </style>
 </head>
 
 <body>
+    <h1 id="articles-heading">Articles on Web Hosting</h1>
+
     <div id="share-buttons">
         <a id="twitter-share-button">
             <i class="bi bi-twitter-x"></i>
@@ -100,26 +127,29 @@
             const twitterButton = document.getElementById('twitter-share-button');
             const link = encodeURIComponent(window.location.href);
             const msg = encodeURIComponent(selectedText);
-            const title = encodeURIComponent(document.querySelector("title").textContent);
 
             const twitterUrl = `https://twitter.com/intent/tweet?text=${msg}&url=${link}`;
 
             if (selectedText && selectedText !== '') {
                 twitterButton.style.display = 'block';
-                const selectionRect = window.getSelection().getRangeAt(0).getBoundingClientRect();
-                const topPosition = selectionRect.top - twitterButton.offsetHeight - 5; // Adjust the value as needed
-                twitterButton.style.top = topPosition + 'px';
+
+                // Get the selection range
+                const selection = window.getSelection();
+                const range = selection.getRangeAt(0);
+                const rect = range.getBoundingClientRect();
+
+                // Set the position of the Twitter button
+                twitterButton.style.top = (rect.top + window.scrollY - twitterButton.offsetHeight) + 'px';
+                twitterButton.style.left = (rect.left + window.scrollX) + 'px';
+
                 twitterButton.href = twitterUrl;
             } else {
                 twitterButton.style.display = 'none';
             }
         }
-
-        // function shareOnTwitter() {
-        //     // Add your custom logic for sharing on Twitter if needed
-        //     alert('Sharing on Twitter: ' + selectedText);
-        // }
     </script>
+
+
 </body>
 
 </html>
