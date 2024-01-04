@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Share Button</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        i {
+            font-size: 20px;
+        }
+
+        #share-buttons {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        #twitter-share-button {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #000000;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="share-buttons">
+        <a id="twitter-share-button">
+            <i class="bi bi-twitter-x"></i>
+        </a>
+    </div>
+
+    <article>
+        <h1>Understanding Web Hosting: A Beginner's Guide</h1>
+        <p>Web hosting is a crucial aspect of establishing an online presence. This article provides beginners with a
+            comprehensive overview of web hosting, explaining key concepts and types of hosting services available.</p>
+        <p>Topics covered include shared hosting, VPS hosting, dedicated hosting, and considerations for choosing the
+            right
+            hosting plan for your website.</p>
+    </article>
+
+    <article>
+        <h1>The Importance of Reliable Web Hosting for Your Business</h1>
+        <p>For businesses operating online, the reliability of web hosting is paramount. This article explores the
+            impact of
+            reliable hosting on a business's website performance, user experience, and overall success.</p>
+        <p>Discussions include uptime guarantees, server maintenance, and the role of customer support in ensuring a
+            smooth
+            online presence for businesses.</p>
+    </article>
+
+    <article>
+        <h1>Comparing Different Web Hosting Providers</h1>
+        <p>With numerous web hosting providers available, choosing the right one can be challenging. This article
+            compares
+            popular hosting providers, highlighting their features, pricing, and customer reviews.</p>
+        <p>Readers will gain insights into the strengths and weaknesses of each provider, assisting them in making
+            informed
+            decisions for their hosting needs.</p>
+    </article>
+
+    <article>
+        <h1>Optimizing Website Speed with Effective Hosting Solutions</h1>
+        <p>Website speed is crucial for user satisfaction and search engine rankings. This article delves into how the
+            choice of web hosting can impact website speed and provides tips for optimizing performance.</p>
+        <p>Topics covered include content delivery networks (CDNs), caching, and server location, offering practical
+            advice
+            for achieving a fast and responsive website.</p>
+    </article>
+
+    <article>
+        <h1>Security Considerations in Web Hosting</h1>
+        <p>Ensuring the security of your website is a top priority. This article explores the security features offered
+            by
+            web hosting providers, such as SSL certificates, firewalls, and regular backups.</p>
+        <p>Readers will learn about best practices for securing their websites and data, safeguarding against common
+            online
+            threats and vulnerabilities.</p>
+    </article>
+
+    <script>
+        let selectedText = "";
+
+        document.addEventListener('mouseup', function () {
+            selectedText = window.getSelection().toString().trim();
+            updateTwitterShareButton();
+        });
+
+        function updateTwitterShareButton() {
+            const twitterButton = document.getElementById('twitter-share-button');
+            const link = encodeURIComponent(window.location.href);
+            const msg = encodeURIComponent(selectedText);
+            const title = encodeURIComponent(document.querySelector("title").textContent);
+
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${msg}&url=${link}`;
+
+            if (selectedText && selectedText !== '') {
+                twitterButton.style.display = 'block';
+                const selectionRect = window.getSelection().getRangeAt(0).getBoundingClientRect();
+                const topPosition = selectionRect.top - twitterButton.offsetHeight - 5; // Adjust the value as needed
+                twitterButton.style.top = topPosition + 'px';
+                twitterButton.href = twitterUrl;
+            } else {
+                twitterButton.style.display = 'none';
+            }
+        }
+
+        // function shareOnTwitter() {
+        //     // Add your custom logic for sharing on Twitter if needed
+        //     alert('Sharing on Twitter: ' + selectedText);
+        // }
+    </script>
+</body>
+
+</html>
